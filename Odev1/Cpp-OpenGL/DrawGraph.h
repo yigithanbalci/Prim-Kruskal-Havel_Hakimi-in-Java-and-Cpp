@@ -47,45 +47,37 @@ display(void)
 	if (graphType == cizge){
 		glLoadIdentity();
 
-		glColor3f(1.0f, 1.0f, 1.0f);
-
-		/*glPointSize(5);
+		glPointSize(5);
 		glBegin(GL_POINTS);
 		for (int i = 0; i < pointsAndCoordinates.size(); i++) {
-			letter = (char)('a' - arrpoints[i] + arrpoints.length - 1);
-			string = "" + letter;
 			glBegin(GL_POINTS);
-			glVertex2f((float)(cordinates[arrpoints[i]][0]), (float)(cordinates[arrpoints[i]][1]));
+			glColor3f(1.0f, 1.0f, 1.0f);
+			glVertex2d(pointsAndCoordinates[i].second.first, pointsAndCoordinates[i].second.second);
 			glEnd();
-			drawLetters(gl, string, (float)((cordinates[arrpoints[i]][2])), (float)((cordinates[arrpoints[i]][3])));
+			
+			glColor3f(0.0f, 1.0f, 0.0f);
+			glRasterPos2f((pointsAndCoordinates[i].second.first) * 1.12 , (pointsAndCoordinates[i].second.second) * 1.12); // <-- position of text
+			
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, pointsAndCoordinates[i].first);
 			glColor3f(1.0f, 1.0f, 1.0f);
 		}
 
+		glLineWidth(1);
 		glEnable(GL_LINE_SMOOTH);
 		glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 		glBegin(GL_LINES);
-
+		
+		//coulda use std::find but this is more easier and basic.
 		int first = 0;
-		for (int i = arrstatic.length - 1; i >= 0; i--) {
-			if (arrstatic[i] == 0) {
-
-			}
-			else {
-				int last = arrstatic.length - 1;
-				int[] myString = new int[arrstatic[last]];
-				myString = arrList.get(first);
-				for (int k = 0; k < myString.length; k++) {
-					glBegin(GL_LINES);
-					glVertex2f((float)(cordinates[arrpoints[i]][0]), (float)(cordinates[arrpoints[i]][1]));
-					glVertex2f((float)(cordinates[myString[k]][0]), (float)(cordinates[myString[k]][1]));
-					glEnd();
-				}
-				last--;
-				first++;
-
+		for (int i = 0; i < pointsAndNeighbors.size(); i++) {
+			for (int k = 0; k < pointsAndNeighbors[i].second.size(); k++){
+				glBegin(GL_LINES);
+				glVertex2d(pointsAndCoordinates[pointsAndNeighbors[i].first - 'a'].second.first, pointsAndCoordinates[pointsAndNeighbors[i].first - 'a'].second.second);
+				glVertex2d(pointsAndCoordinates[pointsAndNeighbors[i].second[k] - 'a'].second.first, pointsAndCoordinates[pointsAndNeighbors[i].second[k] - 'a'].second.second);
+				glEnd();
 			}
 		}
-		glFlush();*/
+		glFlush();
 	}
 }
 
@@ -109,7 +101,7 @@ drawGraph()
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(1280, 720);
-	glutCreateWindow("GLUT bitmap & stroke font example");
+	glutCreateWindow("Graph Draw");
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glColor3f(0, 0, 0);
 	glLineWidth(3.0);

@@ -9,7 +9,7 @@
 
 
 std::vector<std::pair<int, char>> sortVector2IntChar(std::vector<std::pair<int, char>> points_and_degrees);
-void havelHakimiAlgorithm(std::vector<std::pair<int, char>> points_and_degrees);
+bool havelHakimiAlgorithm(std::vector<std::pair<int, char>> points_and_degrees);
 std::vector<std::pair<char, std::pair<double, double>>> pointsAndCoordinatesVector3cff(std::vector<std::pair<int, char>> points_and_degrees);
 int check(std::vector<std::pair<int, char>> points_and_degrees, int size);
 std::vector<std::pair<int, char>> process(std::vector<std::pair<int, char>> points_and_degrees, int size);
@@ -22,26 +22,26 @@ void main(int* argcp, char **argv){
 
 	points_and_degrees = inputLineTo2Map();
 
-	for (int i = 0; i < points_and_degrees.size(); i++){
-		if (points_and_degrees[i].first + i >= points_and_degrees.size()){
+	/*for (unsigned int i = 0; i < points_and_degrees.size(); i++){
+		if (points_and_degrees[i].first + i >= (int)points_and_degrees.size()){
 			std::cout << "error";
 			//std::cin >> wait;
 			return;
 		}
-	}
+	}*/
 
 	std::vector<std::pair<char, std::pair<double, double>>> points_and_coordinates = pointsAndCoordinatesVector3cff(points_and_degrees);
 	
 	setGraphType(cizge);
 	setPointsAndCoordinates(points_and_coordinates);
 
-	havelHakimiAlgorithm(points_and_degrees);
+	if (havelHakimiAlgorithm(points_and_degrees)) drawGraph();
 	
 
 	std::cin >> wait;
 }
 
-void havelHakimiAlgorithm(std::vector<std::pair<int, char>> points_and_degrees)
+bool havelHakimiAlgorithm(std::vector<std::pair<int, char>> points_and_degrees)
 {
 	std::vector<std::pair<char, std::vector<char>>> points_and_neighbors;
 
@@ -52,12 +52,12 @@ void havelHakimiAlgorithm(std::vector<std::pair<int, char>> points_and_degrees)
 		if (points_and_degrees.size() == 1 && points_and_degrees[0].first != 0) a=-1;
 		if (a == -1) {
 			std::cout << "Bu dizi bir cizgeye ait olamaz.";
-			break;
+			return false;
 		}
 		else if (a == 0) {
 			std::cout << "Bu dizi bir cizgeye ait olabilir.";
-			drawGraph();
-			break;
+			setPointsAndNeighbors(points_and_neighbors);
+			return true;
 		}
 		else if (a == 1) {
 			aPair = neighbor(points_and_degrees, i);
@@ -82,7 +82,7 @@ void havelHakimiAlgorithm(std::vector<std::pair<int, char>> points_and_degrees)
 		}
 	}*/
 
-	setPointsAndNeighbors(points_and_neighbors);
+	//setPointsAndNeighbors(points_and_neighbors);
 	//drawGraph();
 }
 
@@ -139,10 +139,10 @@ int check(std::vector<std::pair<int, char>> points_and_degrees, int size)
 std::vector<std::pair<int, char>> process(std::vector<std::pair<int, char>> points_and_degrees, int size)
 {
 	for (int i = size + 1; i <= points_and_degrees[size].first + size; i++){
-		/*if (i >= points_and_degrees.size()){
+		if (i >= points_and_degrees.size()){
 			std::cout << "error";
 			return points_and_degrees;
-		}*/
+		}
 		points_and_degrees[i].first -= 1;
 	}
 
@@ -155,10 +155,10 @@ std::pair<char, std::vector<char>> neighbor(std::vector<std::pair<int, char>> po
 	neighborarr.first = points_and_degrees[size].second;
 	
 	for (int i = size + 1; i <= points_and_degrees[size].first + size; i++){
-		/*if (i >= points_and_degrees.size()){
+		if (i >= points_and_degrees.size()){
 			std::cout << "error";
 			return neighborarr;
-		}*/
+		}
 		neighborarr.second.push_back(points_and_degrees[i].second);
 	}
 	
