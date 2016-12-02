@@ -81,17 +81,27 @@ display(void)
 
 					glEnd();
 
-					/*int w = GraphOpenGL[i][k];
-					std::cout << w;
+					int weight = GraphOpenGL[i][k];
+					std::cout << weight;
+					std::string weightString = std::to_string(weight);
+					std::cout << weightString;
 
-					for (char c : std::to_string(w))
+					/*glPushMatrix();
+					glTranslatef(((pointsAndCoordinates[i].second.first - pointsAndCoordinates[k].second.first)) * 1.12,
+						((pointsAndCoordinates[i].second.second - pointsAndCoordinates[k].second.second)) * 1.12, 0);
+					*/
+					
+					glScalef(1.0 / 2500, 1.0 / 2500, 1.0 / 2500);
+
+					for (char& weightChar : weightString)
 					{
-						/*glRasterPos2f(fabs((pointsAndCoordinates[i].second.first - pointsAndCoordinates[k].second.first)) * 1.12,
-							fabs((pointsAndCoordinates[i].second.second - pointsAndCoordinates[k].second.second)) * 1.12); // <-- position of text
-						glRasterPos2f(0, 0);
-
-						glutStrokeCharacter(GLUT_STROKE_ROMAN, c);
-					}*/
+						std::cout << weightChar;
+						glRasterPos2d((pointsAndCoordinates[i].second.first - pointsAndCoordinates[k].second.first) * 1.12,
+							(pointsAndCoordinates[i].second.second - pointsAndCoordinates[k].second.second) * 1.12); // <-- position of text
+							
+						glutStrokeCharacter(GLUT_STROKE_ROMAN, weightChar);
+					}
+					//glPopMatrix();
 				}
 			}
 		}
@@ -140,6 +150,8 @@ drawGraph()
 	glColor3f(0, 0, 0);
 	glLineWidth(3.0);
 	glutDisplayFunc(display);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 	//	glutReshapeFunc(reshape);
 	glutMainLoop();
 }
