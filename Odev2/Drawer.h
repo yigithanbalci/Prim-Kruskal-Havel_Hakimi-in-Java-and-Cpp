@@ -85,23 +85,27 @@ display(void)
 					std::cout << weight;
 					std::string weightString = std::to_string(weight);
 					std::cout << weightString;
+							
+					glPushMatrix();
 
-					/*glPushMatrix();
-					glTranslatef(((pointsAndCoordinates[i].second.first - pointsAndCoordinates[k].second.first)) * 1.12,
-						((pointsAndCoordinates[i].second.second - pointsAndCoordinates[k].second.second)) * 1.12, 0);
-					*/
-					
+					glTranslatef((((pointsAndCoordinates[i].second.first + pointsAndCoordinates[k].second.first) / 2.0) ) * 1.12,
+						(((pointsAndCoordinates[i].second.second + pointsAndCoordinates[k].second.second) / 2.0) ) * 1.12, 0);
 					glScalef(1.0 / 2500, 1.0 / 2500, 1.0 / 2500);
 
+
+					double counter = 0.0;
 					for (char& weightChar : weightString)
 					{
 						std::cout << weightChar;
-						glRasterPos2d((pointsAndCoordinates[i].second.first - pointsAndCoordinates[k].second.first) * 1.12,
-							(pointsAndCoordinates[i].second.second - pointsAndCoordinates[k].second.second) * 1.12); // <-- position of text
-							
+
+						/*glRasterPos2d((((pointsAndCoordinates[i].second.first + pointsAndCoordinates[k].second.first) / 2.0) + counter) * 1.12,
+							(((pointsAndCoordinates[i].second.second + pointsAndCoordinates[k].second.second) / 2.0) + counter) * 1.12); // <-- position of text
+							*/
 						glutStrokeCharacter(GLUT_STROKE_ROMAN, weightChar);
+						counter++;
 					}
-					//glPopMatrix();
+					glPopMatrix();
+
 				}
 			}
 		}
@@ -114,7 +118,7 @@ display(void)
 			glBegin(GL_LINES);
 			glColor3f(0.0f, 1.0f, 0.0f);
 
-			Sleep(750);
+			Sleep(1500);
 			glBegin(GL_LINES);
 			glVertex2d(pointsAndCoordinates[MSTOpenGL[i].second.first].second.first, pointsAndCoordinates[MSTOpenGL[i].second.first].second.second);
 			glVertex2d(pointsAndCoordinates[MSTOpenGL[i].second.second].second.first, pointsAndCoordinates[MSTOpenGL[i].second.second].second.second);
