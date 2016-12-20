@@ -23,7 +23,7 @@ int ** getKruskalInput(int vertexNumber){
 			Graph[h][w] = 0;
 		}
 	}
-	
+
 	std::cout << "Lutfen her satirda bir kirisi 'kose1 kose2 agirlik'\n ex : 'a b 5' seklinde girin '- 1 for finishin'" << std::endl;
 
 	bool getInput = true;

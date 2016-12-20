@@ -53,7 +53,7 @@ void KruskalAlgorithm(int vertexNumber){
 	{
 		std::cout << kirisler[i].first << " " << kirisler[i].second.first << " " << kirisler[i].second.second << std::endl;
 	}
-	
+
 	std::stable_sort(kirisler.begin(), kirisler.end(), compare);
 
 	std::cout << std::endl;
@@ -144,7 +144,7 @@ void initializeKume(int vertexNumber){
 		k.push_back(i);
 		kruskalKume.push_back(k);
 	}
-	
+
 }
 
 std::vector<std::pair<char, std::pair<double, double>>> pointsAndCoordinatesVector3cff(int vertexNumber)
