@@ -1,6 +1,5 @@
-# ilerialgoritmalarodev
-ileri algoritmalar dersi odevleri.
-Genel olarak ders Graph Theory üzerine yoğunlaşmıştır.
-Prim, Kruskal, Havel-Hakimi, Euler, Generic-MST, Simplex, 
-M Algorithm, Doğrusal Programlama, Ford-Fulkerson Algorithm gibi konular işlenmiş
-ve ödevlerinde ise Prim, Kruskal, Havel-Hakimi algoritmaları istenmiştir.
+# Prim, Kruskal and Havel Hakimi
+In this repository there are three homeworks that given to us in school.
+Some code are in Java and used Java OpenGL (JOGL), and some are in C++ and used OpenGL.
+Simply, they are application of Prim, Kruskal and Havel Hakimi on Graphes.
+I hope it will help you.
